@@ -1,0 +1,89 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-6122836253244588069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b84ea9df0b27d1e479495c9378b7e48c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nodeName: Add
+  nodeRect:
+    serializedVersion: 2
+    x: 306
+    y: 104
+    width: 200
+    height: 65
+  parentGraph: {fileID: 11400000}
+  nodeType: 0
+  isSelected: 0
+  NodeValue: 0
+  output:
+    isOccupied: 0
+    node: {fileID: 0}
+  nodeInputA:
+    isOccupied: 1
+    inputNode: {fileID: 5770326466191069208}
+  nodeInputB:
+    isOccupied: 1
+    inputNode: {fileID: 5770326466191069208}
+  nodeOutput:
+    isOccupied: 0
+    node: {fileID: 0}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0edc8bd8029677f4c8bdabe526267e0c, type: 3}
+  m_Name: ',kdhnvoirntocr'
+  m_EditorClassIdentifier: 
+  graphName: ',kdhnvoirntocr'
+  nodes:
+  - {fileID: -6122836253244588069}
+  - {fileID: 5770326466191069208}
+  selectedNode: {fileID: 0}
+  wantsConnection: 0
+  connectionNode: {fileID: 0}
+  nodeConnectionPointRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 0
+    height: 0
+  connectionEstablished: 0
+--- !u!114 &5770326466191069208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6caacb9f451f4df42874c5c1481f4a08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nodeName: Float
+  nodeRect:
+    serializedVersion: 2
+    x: 52
+    y: 96
+    width: 150
+    height: 65
+  parentGraph: {fileID: 11400000}
+  nodeType: 1
+  isSelected: 0
+  NodeValue: 0
+  output:
+    isOccupied: 0
+    node: {fileID: 0}
