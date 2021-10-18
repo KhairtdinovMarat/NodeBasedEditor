@@ -4,6 +4,7 @@ using UnityEngine;
 #endif
 using System;
 using System.Collections;
+using System.Collections.Generic;
 
 [Serializable]
 public class Marat_NodeBase : ScriptableObject
@@ -14,6 +15,9 @@ public class Marat_NodeBase : ScriptableObject
     public Marat_NodeGraph parentGraph;
     public NodeType nodeType;
     public bool isSelected = false;
+    protected float scale = 1f;
+    protected Vector2 initSize;
+    public float nodeValue;
     #endregion
 
     #region Protected variables
@@ -26,8 +30,10 @@ public class Marat_NodeBase : ScriptableObject
     {
         public bool isOccupied = false;
         public Marat_NodeBase inputNode;
-        public Marat_NodeInput()
-        {
+        public Rect rect;
+        public Marat_NodeInput() 
+        { 
+
         }
     }
 
@@ -36,8 +42,10 @@ public class Marat_NodeBase : ScriptableObject
     {
         public bool isOccupied = false;
         public Marat_NodeBase node;
+        public Rect rect;
         public Marat_NodeOutput()
         {
+            
         }
     }
     #endregion
@@ -45,6 +53,7 @@ public class Marat_NodeBase : ScriptableObject
     #region Main methods
     public virtual void InitNode()
     {
+        zoomed = false;
     }
 
     
@@ -54,7 +63,6 @@ public class Marat_NodeBase : ScriptableObject
         ProcessEvents(e, viewRect);
     }
 #if UNITY_EDITOR
-
 
     public virtual void UpdateNodeGUI(Event e, Rect viewRect, GUISkin viewSkin)
     {
@@ -68,12 +76,16 @@ public class Marat_NodeBase : ScriptableObject
         {
             GUI.Box(nodeRect, nodeName, viewSkin.GetStyle("NodeSelected"));
         }
-
-
         EditorUtility.SetDirty(this);
     }
+
+    public virtual void DrawNodeProperties() 
+    { }
+
+    public virtual void ProcessData()
+    { }
 #endif
-#endregion
+    #endregion
 
     #region Utility methods
     void ProcessEvents(Event e, Rect viewRect)
@@ -104,7 +116,8 @@ public class Marat_NodeBase : ScriptableObject
                 parentGraph.connectionNode = null;
             }
         }
-        if (nodeInput.isOccupied)
+
+        if (nodeInput.isOccupied && nodeInput.inputNode!=null)
         {
             DrawLine(nodeInput.inputNode, rect);
         }
@@ -121,9 +134,32 @@ public class Marat_NodeBase : ScriptableObject
 
     public void DrawLine(Marat_NodeBase inputNode, Rect rect)
     {
-        Vector3 start_vector = new Vector3(inputNode.nodeRect.x + inputNode.nodeRect.width + 15f, inputNode.nodeRect.y + inputNode.nodeRect.height / 2, 0f);
+        Vector3 start_vector = new Vector3(inputNode.nodeRect.x + inputNode.nodeRect.width + 15f * scale, inputNode.nodeRect.y + inputNode.nodeRect.height / 2, 0f);
         Vector3 finish_vector = new Vector3(rect.x, rect.y + (rect.height / 2f), 0);
         parentGraph.DrawLine(start_vector, finish_vector);        
     }
+
+    bool zoomed = false;
+
+    public virtual void Zoom(Event e)
+    {
+        if (!zoomed)
+        {
+            zoomed = true;
+            initSize = nodeRect.size;
+        }
+        
+        scale -= e.delta.y/300f;
+        if (scale > 1f)
+        {
+            scale = 1f;
+        }
+        if (scale < .25f)
+        {
+            scale = .25f;
+        }
+        nodeRect.size = initSize * scale;
+    }
+    
     #endregion
 }

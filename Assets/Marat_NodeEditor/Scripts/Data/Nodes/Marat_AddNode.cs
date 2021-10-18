@@ -14,6 +14,8 @@ public class Marat_AddNode : Marat_NodeBase
 
     public Marat_NodeInput nodeInputA, nodeInputB;
     public Marat_NodeOutput nodeOutput;
+
+   
     #endregion
 
     #region Constructors
@@ -44,16 +46,35 @@ public class Marat_AddNode : Marat_NodeBase
 
         if (parentGraph != null)
         {            
-            Rect inputARect = new Rect(nodeRect.x - 15, nodeRect.y + 7, 15f, 20f);
-            Rect inputBRect = new Rect(nodeRect.x - 15, nodeRect.y + nodeRect.height - 27, 15f, 20f);
-            Rect outputRect = new Rect(nodeRect.x + nodeRect.width, nodeRect.y + nodeRect.height * .5f - 10f, 15f, 20f);
+            Rect inputARect = new Rect(nodeRect.x - 15 * scale, nodeRect.y + 7 * scale, 15f * scale, 20f * scale);
+            Rect inputBRect = new Rect(nodeRect.x - 15 * scale, nodeRect.y + nodeRect.height - 27 * scale, 15f * scale, 20f * scale);
+            Rect outputRect = new Rect(nodeRect.x + nodeRect.width, nodeRect.y + nodeRect.height * .5f - 10f * scale, 15f * scale, 20f * scale);
 
             DrawNodeInput(nodeInputA, inputARect, viewSkin);            
             DrawNodeInput(nodeInputB, inputBRect, viewSkin);
             DrawNodeOutput(outputRect, viewSkin);
             
-            //Debug.Log("Node input A input node:\t"+nodeInputA.inputNode.GetType().ToString());
+            ProcessData();
         }
+    }
+
+    public override void ProcessData()
+    {
+        base.ProcessData();
+
+        if (nodeInputA.isOccupied && nodeInputB.isOccupied)
+        {
+            Marat_NodeBase nodeA = nodeInputA.inputNode;
+            Marat_NodeBase nodeB = nodeInputB.inputNode;
+
+            nodeValue = nodeA.nodeValue + nodeB.nodeValue;
+        }
+    }
+
+    public override void DrawNodeProperties()
+    {
+        base.DrawNodeProperties();
+        EditorGUILayout.FloatField("Sum: ", nodeValue);
     }
 
 #endif

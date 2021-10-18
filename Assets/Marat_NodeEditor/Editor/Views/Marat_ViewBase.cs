@@ -57,6 +57,8 @@ public class Marat_ViewBase
                             editorRect.y*percentageRect.y,
                             editorRect.width*percentageRect.width,
                             editorRect.height*percentageRect.height);
+
+        GUI.Box(viewRect, viewTitle, viewSkin.GetStyle("ViewBackGround"));
     }
 
     public virtual void ProcessEvents(Event e) 

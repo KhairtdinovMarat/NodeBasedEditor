@@ -10,7 +10,6 @@ using UnityEditor;
 public class Marat_FloatNode : Marat_NodeBase
 {
     #region Public variables
-    public float NodeValue;
     public Marat_NodeOutput output;
     #endregion
 
@@ -27,7 +26,7 @@ public class Marat_FloatNode : Marat_NodeBase
         base.InitNode();
 
         nodeType = NodeType.Float;
-        nodeRect = new Rect(10f, 10f, 150f, 65f);
+        nodeRect = new Rect(10f, 10f, 150f, 65f);        
     }
 
     public override void UpdateNode(Event e, Rect viewRect)
@@ -39,15 +38,27 @@ public class Marat_FloatNode : Marat_NodeBase
     public override void UpdateNodeGUI(Event e, Rect viewRect, GUISkin viewSkin)
     {
         base.UpdateNodeGUI(e, viewRect, viewSkin);
-        var outputRect = new Rect(nodeRect.x + nodeRect.width - 2f, nodeRect.y + nodeRect.height * .5f - 10f, 20f, 20f);
+        var outputRect = new Rect(nodeRect.x + nodeRect.width - 2f * scale, nodeRect.y + nodeRect.height * .5f - 10f * scale, 20f * scale, 20f * scale);
 
         DrawNodeOutput(outputRect, viewSkin);
     }
+
+    public override void DrawNodeProperties()
+    {
+        base.DrawNodeProperties();
+        nodeValue = EditorGUILayout.FloatField("Float value", nodeValue);
+    }
 #endif
+
+
 
     #endregion
 
     #region Utility methods
-
+    public override void Zoom(Event e)
+    {
+        base.Zoom(e);
+        
+    }
     #endregion
 }

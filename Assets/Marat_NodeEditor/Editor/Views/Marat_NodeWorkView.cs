@@ -9,13 +9,13 @@ public class Marat_NodeWorkView : Marat_ViewBase
 {
     #region Public variables
     public Marat_NodeWorkView workView;
-    
     #endregion
 
     #region Private variables
     #endregion
 
     #region Protected variables
+    protected int deletedNodeID = 0;
     #endregion
 
     #region Private variables
@@ -34,6 +34,9 @@ public class Marat_NodeWorkView : Marat_ViewBase
 
         GUI.Box(viewRect, viewTitle, viewSkin.GetStyle("ViewBackGround"));
 
+        Marat_NodeUtils.DrawGrid(viewRect, 25, 0.075f, Color.white);
+        Marat_NodeUtils.DrawGrid(viewRect, 100, 0.15f, Color.white);
+
         GUILayout.BeginArea(viewRect);
         if (currentGraph != null)
         {
@@ -43,10 +46,9 @@ public class Marat_NodeWorkView : Marat_ViewBase
 
         ProcessEvents(e);
     }
-
-
-
     #endregion
+
+
 
     #region UtilityMethods
 
@@ -67,36 +69,91 @@ public class Marat_NodeWorkView : Marat_ViewBase
                         //right clich
                         case 1:
                             mousePos = e.mousePosition;
-                            ProcessContextMenu(e);
+                            bool overNode = false;                            
+                            if (currentGraph!=null)
+                            {
+                                if (currentGraph.nodes.Count > 0)
+                                {
+                                    for(int i =0; i < currentGraph.nodes.Count; i++)
+                                    {
+                                        if (currentGraph.nodes[i].nodeRect.Contains(e.mousePosition))
+                                        {
+                                            overNode = true;
+                                            deletedNodeID = i;
+                                            Debug.Log("Over node of type:\t" + currentGraph.nodes[i].GetType().ToString());
+                                        }
+                                    }
+                                }
+                            }
+                            if (!overNode)
+                            {
+                                ProcessContextMenu(e, 1);
+                            }
+                            else
+                            {
+                                ProcessContextMenu(e, 2);
+                            }
                             break;
                     }
                     break;
                 case EventType.MouseDrag:
-                    //Debug.Log("Mouse drag in" + viewTitle);
+                    MoveCamera(e);
                     break;
                 case EventType.MouseUp:
                     //Debug.Log("Mouse button #" + e.button + " released in " + viewTitle);
+                    break;
+                case EventType.ScrollWheel:
+                    Zoom(e);
                     break;
             }
         }
     }
 
-    private void ProcessContextMenu(Event e)
+    private void MoveCamera(Event e)
+    {
+        if(currentGraph!=null && currentGraph.nodes!=null && currentGraph.nodes.Count > 0 && currentGraph.selectedNode == null)
+        {
+            foreach (Marat_NodeBase node in currentGraph.nodes)
+            {
+                node.nodeRect.position += e.delta;
+            }
+        }
+    }
+    private void Zoom(Event e)
+    {
+        if (currentGraph != null && currentGraph.nodes != null && currentGraph.nodes.Count > 0)
+        {
+            foreach (Marat_NodeBase node in currentGraph.nodes)
+            {
+                node.nodeRect.position += (node.nodeRect.position - e.mousePosition) * e.delta.y * -.01f;
+                node.Zoom(e);
+            }
+        }
+    }
+
+    private void ProcessContextMenu(Event e, int menuID)
     {
         GenericMenu menu = new GenericMenu();
-        menu.AddItem(new GUIContent("Create Graph"), false, ContextCallback, "0");
-        menu.AddItem(new GUIContent("Load graph"), false, ContextCallback, "1");
-        
-        if (currentGraph != null)
+
+        if (menuID == 1) 
         {
-            menu.AddSeparator("");
-            menu.AddItem(new GUIContent("Unload graph"), false, ContextCallback, "2");
+            menu.AddItem(new GUIContent("Create Graph"), false, ContextCallback, "0");
+            menu.AddItem(new GUIContent("Load graph"), false, ContextCallback, "1");
 
-            menu.AddSeparator("");
-            menu.AddItem(new GUIContent("Add node/Float"), false, ContextCallback, "3");
-            menu.AddItem(new GUIContent("Add node/Add"), false, ContextCallback, "4");
+            if (currentGraph != null)
+            {
+                menu.AddSeparator("");
+                menu.AddItem(new GUIContent("Unload graph"), false, ContextCallback, "2");
+
+                menu.AddSeparator("");
+                menu.AddItem(new GUIContent("Add node/Float"), false, ContextCallback, "3");
+                menu.AddItem(new GUIContent("Add node/Add"), false, ContextCallback, "4");
+            }
         }
-
+        if (menuID == 2)
+        {
+            menu.AddItem(new GUIContent("Delete node"), false, ContextCallback, "5");
+        }
         menu.ShowAsContext();
         e.Use();
     }
@@ -119,6 +176,9 @@ public class Marat_NodeWorkView : Marat_ViewBase
                 break;
             case "4":
                 Marat_NodeUtils.CreateNode(currentGraph, NodeType.Add, mousePos);
+                break;
+            case "5":
+                Marat_NodeUtils.DeleteNode(deletedNodeID, currentGraph);
                 break;
             default:
                 break;

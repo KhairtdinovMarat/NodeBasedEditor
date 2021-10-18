@@ -24,16 +24,30 @@ public class Marat_NodePropertyView : Marat_ViewBase
     #region MainMethods
 
     public override void UpdateView(Rect editorRect, Rect percentageRect, Event e, Marat_NodeGraph currentGraph)
-    {   
+    {
         base.UpdateView(editorRect, percentageRect, e, currentGraph);
 
-        GUI.Box(viewRect, viewTitle, viewSkin.GetStyle("ViewBackGround"));
-
         GUILayout.BeginArea(viewRect);
+        GUILayout.BeginHorizontal();
+        GUILayout.Space(5);
+        GUILayout.BeginVertical();
+        GUILayout.Space(30);
+        if (currentGraph != null)
+        {
+            if (currentGraph.showNodeProperties)
+            {
+                currentGraph.selectedNode.DrawNodeProperties();
+            }
+        }
+        GUILayout.Space(5);
+        GUILayout.EndVertical();
+        GUILayout.Space(5);
+        GUILayout.EndHorizontal();
         GUILayout.EndArea();
-
         ProcessEvents(e);
     }
+
+
 
     public override void ProcessEvents(Event e)
     {

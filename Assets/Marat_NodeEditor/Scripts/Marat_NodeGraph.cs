@@ -18,6 +18,7 @@ public class Marat_NodeGraph: ScriptableObject
     public Marat_NodeBase connectionNode;
     public Rect nodeConnectionPointRect;
     public bool connectionEstablished = false;
+    public bool showNodeProperties;
     #endregion
 
     #region MainMethods
@@ -44,7 +45,7 @@ public class Marat_NodeGraph: ScriptableObject
     {
         if (nodes.Count > 0)
         {
-            ProcessEvents(e, viewRect);            
+            ProcessEvents(e, viewRect);
         }
     }
 
@@ -82,20 +83,21 @@ public class Marat_NodeGraph: ScriptableObject
             }
         }
 
-        
-
+        if (e.type == EventType.Layout) 
+        {
+            if (selectedNode != null)
+            {
+                showNodeProperties = true;
+            } 
+        }
         EditorUtility.SetDirty(this);
     }
 
-    public void DrawLine(Vector3 startingVector, Vector3 endingVector)
-    {
-        
-            Handles.BeginGUI();
-
-            Handles.DrawBezier(startingVector, endingVector, startingVector + Vector3.right * 50f, endingVector + Vector3.left * 50f, Color.white, null, 5f);
-
-            Handles.EndGUI();
-        
+    public void DrawLine(Vector3 startingVector, Vector3 endingVector)  
+    {        
+        Handles.BeginGUI();
+        Handles.DrawBezier(startingVector, endingVector, startingVector + Vector3.right * 50f, endingVector + Vector3.left * 50f, Color.white, null, 5f);
+        Handles.EndGUI();        
     }
 #endif
 
@@ -111,6 +113,7 @@ public class Marat_NodeGraph: ScriptableObject
                 if(e.type == EventType.MouseDown)
                 {
                     DeselectAllNodes();
+                    showNodeProperties = false;
                     bool setNode = false;
                     selectedNode = null;
                     for (int i = 0; i < nodes.Count; i++)
@@ -120,16 +123,11 @@ public class Marat_NodeGraph: ScriptableObject
                             nodes[i].isSelected = true; 
                             selectedNode = nodes[i];
                             setNode = true;
-                        }                        
+                        }
                     }
                     if (!setNode)
                     {
                         DeselectAllNodes();
-                    }
-
-                    if (wantsConnection)
-                    {
-                        //wantsConnection = false;
                     }
                 }
             }
@@ -141,7 +139,7 @@ public class Marat_NodeGraph: ScriptableObject
         for(int i = 0; i < nodes.Count; i++) 
         {
             nodes[i].isSelected = false;
-        }
+        }        
     }
     #endregion
 }

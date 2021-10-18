@@ -1,32 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-8896299416412990157
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6caacb9f451f4df42874c5c1481f4a08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nodeName: Float
-  nodeRect:
-    serializedVersion: 2
-    x: 84
-    y: 297
-    width: 150
-    height: 65
-  parentGraph: {fileID: 11400000}
-  nodeType: 1
-  isSelected: 0
-  NodeValue: 0
-  output:
-    isOccupied: 0
-    node: {fileID: 0}
---- !u!114 &-8008261794317912734
+--- !u!114 &-7096174522132294149
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,27 +15,52 @@ MonoBehaviour:
   nodeName: Add
   nodeRect:
     serializedVersion: 2
-    x: 650
-    y: 180
-    width: 200
-    height: 65
+    x: 457.0504
+    y: 198.73145
+    width: 170.00003
+    height: 55.250008
   parentGraph: {fileID: 11400000}
   nodeType: 0
   isSelected: 0
+  nodeValue: 20
   NodeValue: 0
   output:
     isOccupied: 0
     node: {fileID: 0}
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
   nodeInputA:
     isOccupied: 1
-    inputNode: {fileID: -3902265358243008233}
+    inputNode: {fileID: 1866574214389357125}
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
   nodeInputB:
     isOccupied: 1
-    inputNode: {fileID: 6011079241467440928}
+    inputNode: {fileID: 5879851878486300099}
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
   nodeOutput:
     isOccupied: 0
     node: {fileID: 0}
---- !u!114 &-3902265358243008233
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+--- !u!114 &-5720177804078844325
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -70,23 +69,57 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6caacb9f451f4df42874c5c1481f4a08, type: 3}
+  m_Script: {fileID: 11500000, guid: b84ea9df0b27d1e479495c9378b7e48c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nodeName: Float
+  nodeName: Add
   nodeRect:
     serializedVersion: 2
-    x: 419
-    y: 125
-    width: 150
-    height: 65
+    x: 739.66846
+    y: 336.2883
+    width: 170.00003
+    height: 55.250008
   parentGraph: {fileID: 11400000}
-  nodeType: 1
+  nodeType: 0
   isSelected: 0
+  nodeValue: 25
   NodeValue: 0
   output:
     isOccupied: 0
     node: {fileID: 0}
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+  nodeInputA:
+    isOccupied: 1
+    inputNode: {fileID: -7096174522132294149}
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+  nodeInputB:
+    isOccupied: 1
+    inputNode: {fileID: 7133988140906023927}
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+  nodeOutput:
+    isOccupied: 0
+    node: {fileID: 0}
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -101,22 +134,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   graphName: Graph
   nodes:
-  - {fileID: 544071134553837837}
-  - {fileID: 6011079241467440928}
-  - {fileID: -3902265358243008233}
-  - {fileID: -8896299416412990157}
-  - {fileID: -8008261794317912734}
+  - {fileID: 1866574214389357125}
+  - {fileID: 5879851878486300099}
+  - {fileID: -7096174522132294149}
+  - {fileID: -5720177804078844325}
+  - {fileID: 7133988140906023927}
   selectedNode: {fileID: 0}
   wantsConnection: 0
   connectionNode: {fileID: 0}
   nodeConnectionPointRect:
     serializedVersion: 2
-    x: 192
-    y: 225.5
-    width: 20
-    height: 20
-  connectionEstablished: 1
---- !u!114 &544071134553837837
+    x: 0
+    y: 0
+    width: 0
+    height: 0
+  connectionEstablished: 0
+  showNodeProperties: 0
+--- !u!114 &1866574214389357125
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -131,18 +165,24 @@ MonoBehaviour:
   nodeName: Float
   nodeRect:
     serializedVersion: 2
-    x: 77
-    y: 176
-    width: 150
-    height: 65
+    x: 140.40938
+    y: 79.20948
+    width: 127.50002
+    height: 55.250008
   parentGraph: {fileID: 11400000}
   nodeType: 1
   isSelected: 0
-  NodeValue: 0
+  nodeValue: 10
   output:
     isOccupied: 0
     node: {fileID: 0}
---- !u!114 &6011079241467440928
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+--- !u!114 &5879851878486300099
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -151,29 +191,58 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b84ea9df0b27d1e479495c9378b7e48c, type: 3}
+  m_Script: {fileID: 11500000, guid: 6caacb9f451f4df42874c5c1481f4a08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nodeName: Add
+  nodeName: Float
   nodeRect:
     serializedVersion: 2
-    x: 368
-    y: 233
-    width: 200
-    height: 65
+    x: 143.08057
+    y: 368.99307
+    width: 127.50002
+    height: 55.250008
   parentGraph: {fileID: 11400000}
-  nodeType: 0
+  nodeType: 1
   isSelected: 0
-  NodeValue: 0
+  nodeValue: 10
   output:
     isOccupied: 0
     node: {fileID: 0}
-  nodeInputA:
-    isOccupied: 1
-    inputNode: {fileID: 544071134553837837}
-  nodeInputB:
-    isOccupied: 1
-    inputNode: {fileID: -8896299416412990157}
-  nodeOutput:
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+--- !u!114 &7133988140906023927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6caacb9f451f4df42874c5c1481f4a08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nodeName: Float
+  nodeRect:
+    serializedVersion: 2
+    x: 455.5735
+    y: 474.51917
+    width: 127.50002
+    height: 55.250008
+  parentGraph: {fileID: 11400000}
+  nodeType: 1
+  isSelected: 0
+  nodeValue: 5
+  output:
     isOccupied: 0
     node: {fileID: 0}
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
